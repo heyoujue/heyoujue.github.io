@@ -3,7 +3,7 @@ body {
     margin-top: 20px;
     margin-left: 10%;
     margin-right: 10%;
-    font-family: monospace, Courier, "Times New Roman";
+    font-family:  "Times New Roman", Courier,monospace;
 }
 
 .title {
