@@ -9,7 +9,7 @@ function showTopbar() {
     if (!topbar.matches(':hover')) {
       topbar.classList.add('hidden');
     }
-  }, 3000);
+  }, 10000);
 }
 
 // Show topbar initially and start timer
@@ -30,5 +30,5 @@ topbar.addEventListener('mouseenter', () => {
 topbar.addEventListener('mouseleave', () => {
   hideTimeout = setTimeout(() => {
     topbar.classList.add('hidden');
-  }, 3000);
+  }, 10000);
 });
