@@ -48,7 +48,7 @@ function resetHideTimer() {
 
     hideTimeout = setTimeout(() => {
       hideTopbar();
-    }, 3000);
+    }, 5000);
   }
 }
 
