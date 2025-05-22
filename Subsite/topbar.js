@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
     overlay.addEventListener('transitionend', () => {
       overlay.classList.add('hidden');
     });
-  }, 300); // 1 second
+  }, 300); // 0. second
 });
 
 window.addEventListener('load', () => {
@@ -21,7 +21,7 @@ window.addEventListener('load', () => {
     overlay.addEventListener('transitionend', () => {
       overlay.classList.add('hidden');
     });
-  }, 800); // 1 second
+  }, 800); // 0.8 second
 });
 
 
@@ -31,9 +31,8 @@ let hideTimeout;
 let isPinnedOpen = false;
 
 function hideTopbar() {
-  if (!isPinnedOpen) {
-    topbar.classList.add("hidden");
-  }
+  topbar.classList.add("hidden");
+  isPinnedOpen = false;   // Reset pinned state on hide
 }
 
 function showTopbar() {
@@ -41,37 +40,24 @@ function showTopbar() {
 }
 
 function resetHideTimer() {
-  if (!isPinnedOpen) {
-    showTopbar();
+  showTopbar();
 
-    if (hideTimeout) clearTimeout(hideTimeout);
+  if (hideTimeout) clearTimeout(hideTimeout);
 
-    hideTimeout = setTimeout(() => {
-      hideTopbar();
-    }, 5000);
-  }
+  // Start timer to hide topbar after 3 seconds of inactivity
+  hideTimeout = setTimeout(() => {
+    hideTopbar();
+  }, 5000);
 }
 
-// Mouse movement resets timer only if not pinned open
 window.addEventListener("mousemove", () => {
-  if (!isPinnedOpen) {
-    resetHideTimer();
-  }
+  resetHideTimer();
 });
 
-// Clicking pull button toggles pinned open state
 pullButton.addEventListener("click", () => {
-  if (isPinnedOpen) {
-    // Close topbar (unpin)
-    isPinnedOpen = false;
-    resetHideTimer(); // Start hide timer again
-  } else {
-    // Open topbar (pin)
-    isPinnedOpen = true;
-    showTopbar();
-    if (hideTimeout) clearTimeout(hideTimeout);
-  }
+  showTopbar();
+  resetHideTimer(); // Restart inactivity timer to auto-hide again after 3s
 });
 
-// Start hide timer on page load
+// Initialize: start the timer on page load
 resetHideTimer();
